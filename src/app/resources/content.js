@@ -93,6 +93,16 @@ const about = {
         link: "https://www.nextjs.org/"
       },
       {
+        name: "TailwindCSS",
+        icon: "/images/icons/tailwind.svg",
+        link: "https://tailwindcss.com/"
+      },
+      {
+        name: "Three.js",
+        icon: "/images/icons/threejs.svg",
+        link: "https://threejs.org/"
+      },
+      {
         name: "Python",
         icon: "/images/icons/python.svg",
         link: "https://www.python.org/"
@@ -101,7 +111,12 @@ const about = {
         name: "C++",
         icon: "/images/icons/cpp.svg",
         link: "https://isocpp.org/"
-      }
+      },
+      {
+        name: "OCaml",
+        icon: "/images/icons/ocaml.svg",
+        link: "https://ocaml.org"
+      },
     ]
   }
 };
