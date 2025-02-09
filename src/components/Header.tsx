@@ -1,10 +1,7 @@
 "use client";
-
 import { usePathname } from "next/navigation";
-
 import { Flex, Line, ToggleButton } from "@/once-ui/components";
 import styles from "@/components/Header.module.scss";
-
 import { routes, about, work, contact } from "@/app/resources";
 
 export const Header = () => {
@@ -73,14 +70,14 @@ export const Header = () => {
                 <>
                   <ToggleButton
                     className="s-flex-hide"
-                    prefixIcon="emptyEmail"
+                    prefixIcon="outlineEmail"
                     href="/contact"
                     label={contact.label}
                     selected={pathname === "/contact"}
                   />
                   <ToggleButton
                     className="s-flex-show"
-                    prefixIcon="emptyEmail"
+                    prefixIcon="outlineEmail"
                     href="/contact"
                     selected={pathname === "/contact"}
                   />

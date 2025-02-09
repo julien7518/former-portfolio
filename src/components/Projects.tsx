@@ -1,11 +1,11 @@
 import { getProjects } from "@/app/utils/utils";
 import ProjectsClient from "./ProjectsClient";
 
-interface ProjectsProps {
+interface RangeProps {
   range?: [number, number?];
 }
 
-export default function Projects({ range }: ProjectsProps) {
+export default function Projects({ range }: RangeProps) {
   const allProjects = getProjects();
 
   const sortedProjects = allProjects.sort((a, b) => {

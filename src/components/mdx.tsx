@@ -40,20 +40,11 @@ type CustomLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
 };
 
 function createLink({ href, children, ...props }: CustomLinkProps) {
-  if (href.startsWith("/") || href.startsWith("#")) {
-    return (
-      <SmartLink href={href} {...props}>
-        {children}
-      </SmartLink>
-    );
-  }
-  else {
-    return (
-      <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
-        {children}
-      </a>
-    );
-  }
+  return (
+    <SmartLink href={href} {...props}>
+      {children}
+    </SmartLink>
+  );
 }
 
 function createImage({ alt, src, ...props }: SmartImageProps & { src: string }) {
@@ -75,17 +66,6 @@ function createImage({ alt, src, ...props }: SmartImageProps & { src: string }) 
   );
 }
 
-function slugify(str: string): string {
-  return str
-    .toString()
-    .toLowerCase()
-    .trim() // Remove whitespace from both ends of a string
-    .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(/&/g, "-and-") // Replace & with 'and'
-    .replace(/[^\w\-]+/g, "") // Remove all non-word characters except for -
-    .replace(/\-\-+/g, "-"); // Replace multiple - with single -
-}
-
 function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
   const CustomHeading = ({ children }: TextProps) => {
     
@@ -101,15 +81,13 @@ function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
     const variant = variantMap[level];
     const tag = `h${level}` as keyof React.JSX.IntrinsicElements;
     
-    const slug = slugify(children as string);
-    
     return (
       <Flex
         style={{ marginTop: "var(--static-space-24)", marginBottom: "var(--static-space-12)" }}
         vertical="center"
         gap="4"
       >
-        <Heading id={slug} variant={variant} as={tag}>
+        <Heading variant={variant} as={tag}>
           {children}
         </Heading>
       </Flex>

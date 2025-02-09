@@ -1,15 +1,15 @@
 import { notFound } from "next/navigation";
 import { getProjects } from "@/app/utils/utils";
-import { Button, Column, Flex, Heading, SmartImage, Text } from "@/once-ui/components";
-import { baseURL } from "@/app/resources";
-import { person } from "@/app/resources/content";
+import { Button, Column, Flex, Heading, SmartImage, Text, Grid, Scroller, SmartLink } from "@/once-ui/components";
+import { baseURL, person, about, techsTableIndex } from "@/app/resources";
 import ScrollToHash from "@/components/ScrollToHash";
 import { CustomMDX } from "@/components/mdx";
+import TechButton from "@/components/TechButton";
 
 interface WorkParams {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export function formatDate(date: string) {
@@ -26,15 +26,21 @@ export function formatDate(date: string) {
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getProjects();
-  return posts.map((post) => ({
-    slug: post.slug,
+  return posts.map((project) => ({
+    slug: project.slug,
   }));
 }
 
-export function generateMetadata({ params: { slug } }: WorkParams) {
-  let post = getProjects().find((post) => post.slug === slug);
+export async function generateMetadata(props: WorkParams) {
+  const params = await props.params;
 
-  if (!post) {
+  const {
+    slug
+  } = params;
+
+  let project = getProjects().find((project) => project.slug === slug);
+
+  if (!project) {
     return;
   }
 
@@ -44,7 +50,7 @@ export function generateMetadata({ params: { slug } }: WorkParams) {
     summary: description,
     images,
     image,
-  } = post.metadata;
+  } = project.metadata;
   let ogImage = image ? `https://${baseURL}${image}` : `https://${baseURL}/og?title=${title}`;
 
   return {
@@ -56,7 +62,7 @@ export function generateMetadata({ params: { slug } }: WorkParams) {
       description,
       type: "article",
       publishedTime,
-      url: `https://${baseURL}/work/${post.slug}`,
+      url: `https://${baseURL}/work/${project.slug}`,
       images: [
         {
           url: ogImage,
@@ -72,10 +78,11 @@ export function generateMetadata({ params: { slug } }: WorkParams) {
   };
 }
 
-export default function Project({ params }: WorkParams) {
-  let post = getProjects().find((post) => post.slug === params.slug);
+export default async function Project(props: WorkParams) {
+  const params = await props.params;
+  let project = getProjects().find((project) => project.slug === params.slug);
 
-  if (!post) {
+  if (!project) {
     notFound();
   }
 
@@ -88,14 +95,14 @@ export default function Project({ params }: WorkParams) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `https://${baseURL}${post.metadata.image}`
-              : `https://${baseURL}/og?title=${post.metadata.title}`,
-            url: `https://${baseURL}/work/${post.slug}`,
+            headline: project.metadata.title,
+            datePublished: project.metadata.publishedAt,
+            dateModified: project.metadata.publishedAt,
+            description: project.metadata.summary,
+            image: project.metadata.image
+              ? `https://${baseURL}${project.metadata.image}`
+              : `https://${baseURL}/og?title=${project.metadata.title}`,
+            url: `https://${baseURL}/work/${project.slug}`,
             author: {
               "@type": "Person",
               name: person.name,
@@ -107,24 +114,66 @@ export default function Project({ params }: WorkParams) {
         <Button href="/work" variant="tertiary" weight="default" size="s" prefixIcon="chevronLeft">
           Projects
         </Button>
-        <Heading variant="display-strong-s">{post.metadata.title}</Heading>
+        <Heading variant="display-strong-s">{project.metadata.title}</Heading>
       </Column>
-      {post.metadata.images.length > 0 && (
-        <SmartImage
-          priority
-          aspectRatio="16 / 9"
-          radius="m"
-          alt="image"
-          src={post.metadata.images[0]}
-        />
+      {project.metadata.images.length > 0 && (
+        <Flex
+          fillWidth
+          paddingLeft="40"
+          paddingRight="40"
+        >
+          <SmartImage
+            priority
+            aspectRatio="16 / 9"
+            radius="m"
+            alt="image"
+            src={project.metadata.images[0]}
+          />
+        </Flex>
       )}
       <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
-        <Flex gap="12" marginBottom="24" vertical="center">
+        <Flex gap="12" vertical="center">
           <Text variant="body-default-s" onBackground="neutral-weak">
-            {formatDate(post.metadata.publishedAt)}
+            {formatDate(project.metadata.publishedAt)}
           </Text>
+          {project.metadata.link && (
+            <SmartLink
+              suffixIcon="arrowUpRightFromSquare"
+              style={{ margin: "0", width: "fit-content" }}
+              href={project.metadata.link}
+            >
+              <Text variant="body-default-s">View project</Text>
+            </SmartLink>
+          )}
         </Flex>
-        <CustomMDX source={post.content} />
+        <CustomMDX source={project.content} />
+        <Heading marginBottom="12" marginTop="12" as="h2">Technologies used</Heading>
+        <Grid columns={6} fillWidth gap="l" marginBottom="40">
+          {project.metadata.techs.map((tech, index) => (
+            <TechButton key={index} small={true} techs={(about.technologies.techs)[techsTableIndex[tech]]}/>
+          ))}
+        </Grid>
+        {project.metadata.images.length > 1 && (
+          <>
+          <Heading marginBottom="12" marginTop="12" as="h2">Gallery</Heading>
+          <Scroller
+            direction="row"
+            maxHeight={12}
+            fillWidth
+            gap="16"
+          >
+            {project.metadata.images.map((img, index) => (
+              <SmartImage
+                key={index}
+                src={img}
+                radius="l"
+                minWidth={24}
+                minHeight={12}
+              />
+            ))}
+          </Scroller>
+          </>
+        )}
       </Column>
       <ScrollToHash />
     </Column>

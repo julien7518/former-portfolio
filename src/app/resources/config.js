@@ -10,9 +10,9 @@ const routes = {
 const style = {
   theme: "light",
   neutral: "gray",
-  brand: "emerald",
-  accent: "orange",
-  solid: "contrast",
+  brand: "cyan",
+  accent: "blue",
+  solid: "color",
   solidStyle: "plastic",
   border: "playful",
   surface: "translucent",

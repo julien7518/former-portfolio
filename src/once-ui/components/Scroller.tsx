@@ -107,7 +107,6 @@ const Scroller: React.FC<ScrollerProps> = ({
       position="relative"
       className={classNames(styles.container, className)}
       style={style}
-      {...rest}
     >
       {showPrevButton && (
         <Fade to="right" width={4} fillHeight position="absolute" left="0" zIndex={1}>
@@ -135,6 +134,7 @@ const Scroller: React.FC<ScrollerProps> = ({
         direction={direction}
         className={classNames(styles.scroller, styles[direction])}
         ref={scrollerRef}
+        {...rest}
       >
         {wrappedChildren}
       </Flex>

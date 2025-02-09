@@ -20,14 +20,15 @@ export default function ProjectsClient({ projects }) {
     )}
     {/* @ts-ignore : Container is not imported but created just above */}
     <Container fillWidth gap="xl" marginBottom="40" paddingX="l" {...containerProps}>
-      {projects.map((post) => (
+      {projects.map((project) => (
         <ProjectCard
-          key={post.slug}
-          href={`work/${post.slug}`}
-          images={post.metadata.images}
-          title={post.metadata.title}
-          description={post.metadata.summary}
-          link={post.metadata.link || ""}
+          key={project.slug}
+          href={`work/${project.slug}`}
+          images={project.metadata.images}
+          title={project.metadata.title}
+          description={project.metadata.summary}
+          link={project.metadata.link || ""}
+          techs={project.metadata.techs}
         />
       ))}
     </Container>

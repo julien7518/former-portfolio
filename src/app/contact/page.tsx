@@ -1,5 +1,35 @@
-import { Button, Flex, IconButton } from "@/once-ui/components";
-import { social } from "@/app/resources/content";
+import { Flex, Icon, Input, Textarea, Button } from "@/once-ui/components";
+import { contact } from "../resources";
+import { baseURL } from "../resources";
+
+export async function generateMetadata() {
+  const title = contact.title;
+  const description = contact.description;
+  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: `https://${baseURL}/about`,
+      images: [
+        {
+          url: ogImage,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
 
 export default function Contact() {
   return (
@@ -11,30 +41,32 @@ export default function Contact() {
       horizontal="center"
       fitWidth
     >
-      {social.map(
-        (item) =>
-          item.link && (
-            <>
-              <Button
-                className="s-flex-hide"
-                key={item.name}
-                href={item.link}
-                prefixIcon={item.icon}
-                label={item.name}
-                size="s"
-                variant="secondary"
-              />
-              <IconButton
-                className="s-flex-show"
-                size="l"
-                key={`${item.name}-icon`}
-                href={item.link}
-                icon={item.icon}
-                variant="secondary"
-              />
-            </>
-          )
-      )}
+      <Input
+        id="email"
+        defaultValue=""
+        label="Email"
+        hasPrefix={<Icon name="outlineEmail" size="s"/>}
+      />
+      <Input
+        id="subject"
+        defaultValue=""
+        hasPrefix={<Icon name="subject" size="s"/>}
+        label="Subject"
+      />
+      <Textarea
+        id="message"
+        defaultValue=""
+        label="Message"
+        resize="vertical"
+        lines={10}
+      />
+      <Flex margin="12">
+        <Button
+          variant="primary"
+          size="l"
+          label="Send"
+        />
+      </Flex>
     </Flex>
   );
 }

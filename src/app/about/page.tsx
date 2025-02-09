@@ -4,11 +4,13 @@ import {
   Heading,
   Tag,
   Text,
-  Grid
+  Grid,
 } from "@/once-ui/components";
 import { baseURL, person, about, social } from "@/app/resources";
 import TableOfContents from "@/components/TableOfContents";
 import styles from "@/components/TableOfContents.module.scss";
+import React from "react";
+import TechButton from "@/components/TechButton";
 
 export async function generateMetadata() {
   const title = about.title;
@@ -77,6 +79,7 @@ export default function About() {
           }),
         }}
       />
+      
       <Column
         left="0"
         style={{ top: "50%", transform: "translateY(-50%)" }}
@@ -168,7 +171,7 @@ export default function About() {
                     </Text>
                     <Column as="ul" gap="16">
                       {experience.achievements.map(
-                        (achievement: JSX.Element, index: number) => (
+                        (achievement: React.JSX.Element, index: number) => (
                           <Text
                             as="li"
                             variant="body-default-m"
@@ -195,9 +198,9 @@ export default function About() {
             </Heading>
             <Grid columns={5} fillWidth gap="l" marginBottom="40">
               {about.technologies.techs.map((techs, index) => (
-                <Text key={`${techs.label}-${index}`}>
-                  {techs.label}
-                </Text>
+                techs.display && (
+                  <TechButton key={index} techs={techs}/>
+              )
               ))}
             </Grid>
           </>

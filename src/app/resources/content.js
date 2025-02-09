@@ -85,41 +85,97 @@ const about = {
       {
         name: "React",
         icon: "/images/icons/react.svg",
-        link: "https://www.react.dev/"
+        link: "https://www.react.dev/",
+        display: true,
       },
       {
         name: "Next.js",
         icon: "/images/icons/nextjs.svg",
-        link: "https://www.nextjs.org/"
+        link: "https://www.nextjs.org/",
+        display: true,
+      },
+      {
+        name: "Vercel",
+        icon: "/images/icons/vercel.svg",
+        link: "https://vercel.com/home/",
+        display: true,
       },
       {
         name: "TailwindCSS",
         icon: "/images/icons/tailwind.svg",
-        link: "https://tailwindcss.com/"
+        link: "https://tailwindcss.com/",
+        display: true,
+      },
+      {
+        name: "Supabase",
+        icon: "/images/icons/supabase.svg",
+        link: "https://supabase.com/",
+        display: true,
       },
       {
         name: "Three.js",
         icon: "/images/icons/threejs.svg",
-        link: "https://threejs.org/"
+        link: "https://threejs.org/",
+        display: true,
       },
       {
         name: "Python",
         icon: "/images/icons/python.svg",
-        link: "https://www.python.org/"
+        link: "https://www.python.org/",
+        display: true,
       },
       {
         name: "C++",
         icon: "/images/icons/cpp.svg",
-        link: "https://isocpp.org/"
+        link: "https://isocpp.org/",
+        display: true,
       },
       {
         name: "OCaml",
         icon: "/images/icons/ocaml.svg",
-        link: "https://ocaml.org"
+        link: "https://ocaml.org",
+        display: true,
+      },
+      {
+        name: "HTML",
+        icon: "/images/icons/html.svg",
+        link: "https://ocaml.org",
+        display: false,
+      },
+      {
+        name: "CSS",
+        icon: "/images/icons/css.svg",
+        link: "https://ocaml.org",
+        display: false,
+      },
+      {
+        name: "JavaScript",
+        icon: "/images/icons/javascript.svg",
+        link: "https://ocaml.org",
+        display: false,
       },
     ]
   }
 };
+
+const techsTableIndex = {
+  "react": 0,
+  "next": 1,
+  "nextjs": 1,
+  "vercel": 2,
+  "tailwind": 3,
+  "tailwindcss": 3,
+  "supabase": 4,
+  "three": 5,
+  "threejs": 5,
+  "python": 6,
+  "cpp": 7,
+  "ocaml": 8,
+  "html": 9,
+  "css":  10,
+  "js": 11,
+  "javascript": 11,
+}
 
 const work = {
   label: "Work",
@@ -133,4 +189,4 @@ const contact = {
   description: `Contact ${person.name}, ${person.role}`,
 }
 
-export { person, social, home, about, work, contact };
+export { person, social, home, about, work, contact, techsTableIndex };

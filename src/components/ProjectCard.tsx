@@ -7,7 +7,9 @@ import {
   Heading,
   SmartLink,
   Text,
+  AvatarGroup
 } from "@/once-ui/components";
+import { about, techsTableIndex } from "@/app/resources";
 
 interface ProjectCardProps {
   href: string;
@@ -15,6 +17,7 @@ interface ProjectCardProps {
   title: string;
   description: string;
   link: string;
+  techs: string[];
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -23,6 +26,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
   link,
+  techs,
 }) => {
   return (
     <Column fillWidth>
@@ -70,6 +74,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 </SmartLink>
               )}
             </Flex>
+            {techs.length > 0 && (
+              <AvatarGroup
+                avatars={
+                  techs.map((tech) => (
+                    (about.technologies.techs)[techsTableIndex[tech]] ? {src: (about.technologies.techs)[techsTableIndex[tech]].icon} : {}
+                  ))
+                }
+                limit={3}
+                size="m"
+              />
+            )}
           </Column>
       </Column>
     </Column>

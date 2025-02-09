@@ -1,6 +1,6 @@
 import { baseURL, home } from "@/app/resources";
 
-export async function generateMetadata({page}) {
+export async function generateMetadata({params}) {
   const title = home.title;
   const description = home.description;
   const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
