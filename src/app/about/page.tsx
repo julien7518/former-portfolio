@@ -1,0 +1,240 @@
+import {
+  Column,
+  Flex,
+  Heading,
+  Tag,
+  Text,
+  Grid
+} from "@/once-ui/components";
+import { baseURL, person, about, social } from "@/app/resources";
+import TableOfContents from "@/components/TableOfContents";
+import styles from "@/components/TableOfContents.module.scss";
+
+export async function generateMetadata() {
+  const title = about.title;
+  const description = about.description;
+  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: `https://${baseURL}/about`,
+      images: [
+        {
+          url: ogImage,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
+
+export default function About() {
+  const structure = about.work.display ? 
+  [
+    about.intro.title,
+    about.work.title,
+    about.technologies.title,
+    about.studies.title,
+  ] : 
+  [
+    about.intro.title,
+    about.technologies.title,
+    about.studies.title,
+  ];
+
+  return (
+    <Column maxWidth="m">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: person.name,
+            jobTitle: person.role,
+            description: about.intro.description,
+            url: `https://${baseURL}/about`,
+            image: `${baseURL}/images/${person.avatar}`,
+            sameAs: social
+              .filter((item) => item.link && !item.link.startsWith("mailto:")) // Filter out empty links and email links
+              .map((item) => item.link),
+            worksFor: {
+              "@type": "Organization",
+              name: about.work.experiences[0].company || "",
+            },
+          }),
+        }}
+      />
+      <Column
+        left="0"
+        style={{ top: "50%", transform: "translateY(-50%)" }}
+        position="fixed"
+        paddingLeft="24"
+        gap="32"
+        hide="s"
+      >
+        <TableOfContents structure={structure} />
+      </Column>
+      <Flex fillWidth mobileDirection="column" horizontal="center">
+        <Column className={styles.blockAlign} flex={9} maxWidth={40}>
+          <Column
+            id={about.intro.title}
+            fillWidth
+            minHeight="160"
+            vertical="center"
+            marginBottom="32"
+          >
+            <Heading className={styles.textAlign} variant="display-strong-xl">
+              {person.name}
+            </Heading>
+            <Text
+              className={styles.textAlign}
+              variant="display-default-xs"
+              onBackground="neutral-weak"
+              marginBottom="8"
+            >
+              {person.role}
+            </Text>
+            <Column fillWidth>
+              <Flex wrap gap="8">
+                {person.languages.map((language, index) => (
+                  <Tag key={index} size="m">
+                    {language}
+                  </Tag>
+                ))}
+              </Flex>
+          </Column>
+          </Column>
+
+          <Column
+            textVariant="body-default-l"
+            fillWidth
+            gap="m"
+            marginBottom="l"
+          >
+            {about.intro.description}
+          </Column>
+
+          {about.work.display && (
+            <> 
+              <Heading
+                as="h2"
+                id={about.work.title}
+                variant="display-strong-s"
+                marginBottom="m"
+              >
+                {about.work.title}
+              </Heading>
+              <Column fillWidth gap="l" marginBottom="40">
+                {about.work.experiences.map((experience, index) => (
+                  <Column
+                    key={`${experience.company}-${experience.role}-${index}`}
+                    fillWidth
+                  >
+                    <Flex
+                      fillWidth
+                      horizontal="space-between"
+                      vertical="end"
+                      marginBottom="4"
+                    >
+                      <Text id={experience.company} variant="heading-strong-l">
+                        {experience.company}
+                      </Text>
+                      <Text
+                        variant="heading-default-xs"
+                        onBackground="neutral-weak"
+                      >
+                        {experience.timeframe}
+                      </Text>
+                    </Flex>
+                    <Text
+                      variant="body-default-s"
+                      onBackground="brand-weak"
+                      marginBottom="m"
+                    >
+                      {experience.role}
+                    </Text>
+                    <Column as="ul" gap="16">
+                      {experience.achievements.map(
+                        (achievement: JSX.Element, index: number) => (
+                          <Text
+                            as="li"
+                            variant="body-default-m"
+                            key={`${experience.company}-${index}`}
+                          >
+                            {achievement}
+                          </Text>
+                        )
+                      )}
+                    </Column>
+                  </Column>
+                ))}
+              </Column>
+            </>
+          )}
+          <>
+            <Heading
+              as="h2"
+              id={about.technologies.title}
+              variant="display-strong-s"
+              marginBottom="m"
+            >
+              {about.technologies.title}
+            </Heading>
+            <Grid columns={5} fillWidth gap="l" marginBottom="40">
+              {about.technologies.techs.map((techs, index) => (
+                <Text key={`${techs.label}-${index}`}>
+                  {techs.label}
+                </Text>
+              ))}
+            </Grid>
+          </>
+          <>
+            <Heading
+              as="h2"
+              id={about.studies.title}
+              variant="display-strong-s"
+              marginBottom="m"
+            >
+              {about.studies.title}
+            </Heading>
+            <Column fillWidth gap="l" marginBottom="40">
+              {about.studies.institutions.map((institution, index) => (
+                <Column key={`${institution.name}-${index}`} fillWidth gap="4">
+                  <Text id={institution.name} variant="heading-strong-l">
+                    {institution.name}
+                  </Text>
+                  <Text
+                    variant="body-default-s"
+                    onBackground="neutral-weak"
+                    marginBottom="xs"
+                  >
+                    {institution.location}
+                  </Text>
+                  <Text
+                    variant="heading-default-xs"
+                    onBackground="neutral-weak"
+                  >
+                    {institution.description}
+                  </Text>
+                </Column>
+              ))}
+            </Column>
+          </>
+        </Column>
+      </Flex>
+    </Column>
+  );
+}
