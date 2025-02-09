@@ -1,6 +1,7 @@
 import { Flex, Icon, Input, Textarea, Button } from "@/once-ui/components";
 import { contact } from "../resources";
 import { baseURL } from "../resources";
+import MobileTitle from "@/components/MobileTitle";
 
 export async function generateMetadata() {
   const title = contact.title;
@@ -41,10 +42,11 @@ export default function Contact() {
       horizontal="center"
       fitWidth
     >
+      <MobileTitle page={contact} />
       <Input
         id="email"
         defaultValue=""
-        label="Email"
+        label="Your email"
         hasPrefix={<Icon name="outlineEmail" size="s"/>}
       />
       <Input

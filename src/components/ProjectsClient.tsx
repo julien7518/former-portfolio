@@ -1,7 +1,9 @@
 "use client";
-import { Column, Grid, Text, Flex } from "@/once-ui/components";
+import { Column, Grid } from "@/once-ui/components";
 import { ProjectCard } from "./ProjectCard";
 import { useIsMobile } from "./MobileContext";
+import MobileTitle from "./MobileTitle";
+import { work } from "@/app/resources";
 
 export default function ProjectsClient({ projects }) {
   const isMobile = useIsMobile()
@@ -11,13 +13,7 @@ export default function ProjectsClient({ projects }) {
 
   return (
     <>
-    {isMobile && (
-      <Flex padding="20" center={true}>
-        <Text marginBottom="s" variant="display-strong-xl">
-          Projects
-        </Text>
-      </Flex>
-    )}
+    <MobileTitle page={work} />
     {/* @ts-ignore : Container is not imported but created just above */}
     <Container fillWidth gap="xl" marginBottom="40" paddingX="l" {...containerProps}>
       {projects.map((project) => (

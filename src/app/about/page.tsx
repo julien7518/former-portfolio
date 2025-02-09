@@ -4,13 +4,13 @@ import {
   Heading,
   Tag,
   Text,
-  Grid,
 } from "@/once-ui/components";
 import { baseURL, person, about, social } from "@/app/resources";
 import TableOfContents from "@/components/TableOfContents";
 import styles from "@/components/TableOfContents.module.scss";
 import React from "react";
-import TechButton from "@/components/TechButton";
+import GridTechnologies from "@/components/GridTechnologies";
+import LanguagesList from "@/components/LanguagesList";
 
 export async function generateMetadata() {
   const title = about.title;
@@ -110,15 +110,7 @@ export default function About() {
             >
               {person.role}
             </Text>
-            <Column fillWidth>
-              <Flex wrap gap="8">
-                {person.languages.map((language, index) => (
-                  <Tag key={index} size="m">
-                    {language}
-                  </Tag>
-                ))}
-              </Flex>
-          </Column>
+            <LanguagesList />
           </Column>
 
           <Column
@@ -196,13 +188,7 @@ export default function About() {
             >
               {about.technologies.title}
             </Heading>
-            <Grid columns={5} fillWidth gap="l" marginBottom="40">
-              {about.technologies.techs.map((techs, index) => (
-                techs.display && (
-                  <TechButton key={index} techs={techs}/>
-              )
-              ))}
-            </Grid>
+            <GridTechnologies technologies={about.technologies.techs}/>
           </>
           <>
             <Heading

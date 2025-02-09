@@ -70,7 +70,7 @@ const about = {
       {
         name: "ESILV - École Supérieure d'Ingénieurs Léonard de Vinci",
         location: "Paris, France",
-        description: <>Studied engineering and creative technology</>,
+        description: <>Studying engineering and creative technology</>,
       },
       {
         name: "Dorset College",
