@@ -12,7 +12,7 @@ interface WorkParams {
   }>;
 }
 
-export function formatDate(date: string) {
+function formatDate(date) {
   const targetDate = new Date(date);
 
   const fullDate = targetDate.toLocaleString("en-us", {

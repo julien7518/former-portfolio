@@ -8,6 +8,8 @@ import { Inter } from "next/font/google";
 import { Source_Code_Pro } from "next/font/google";
 import { Column, Flex, Background } from "@/once-ui/components";
 import { MobileProvider } from "@/components/MobileContext";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export async function generateMetadata() {
   return {
@@ -82,6 +84,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         code.variable,
       )}
     >
+      <Analytics/>
+      <SpeedInsights />
       <MobileProvider>
         <Column style={{ minHeight: "100vh" }} as="body" fillWidth margin="0" padding="0">
             <Background
