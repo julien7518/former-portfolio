@@ -1,16 +1,21 @@
 "use client";
-import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import { MeshLambertMaterial } from 'three';
 import lands from '@/app/resources/continents.json';
-import { Spinner } from '@/once-ui/components';
-
-const Globe = dynamic(() => import("react-globe.gl"), { 
-  ssr: false,
-  loading: () => <Spinner/>
-});
 
 export default function ModernGlobe() {
+  const [Globe, setGlobe] = useState<any>(null);
   const globeMeshMaterial = new MeshLambertMaterial({ color: '#bbbbbb' });
+
+  useEffect(() => {
+    import("react-globe.gl").then((mod) => {
+      setGlobe(() => mod.default);
+    });
+  }, []);
+
+  if (!Globe) {
+    return <></>;
+  }
 
   return (
     <Globe
@@ -25,7 +30,6 @@ export default function ModernGlobe() {
       hexPolygonResolution={3}
       hexPolygonMargin={0.24}
       showGraticules={true}
-      waitForGlobeReady={false}
     />
   );
 }

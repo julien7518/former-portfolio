@@ -1,12 +1,29 @@
 "use client";
 
+import { Suspense, useEffect, useState } from "react";
 import { useIsMobile } from "@/components/MobileContext";
-import { Heading, Flex, Text, Button, RevealFx, Column } from "@/once-ui/components";
+import { Heading, Flex, Text, Button, RevealFx, Column, Spinner } from "@/once-ui/components";
 import { baseURL, home, about, person } from "@/app/resources";
 import ModernGlobe from "./ModernGlobe";
 
 export default function Home() {
   const isMobile = useIsMobile();
+  const [isGlobeVisible, setIsGlobeVisible] = useState<boolean>(false);
+  const [animationComplete, setAnimationComplete] = useState<boolean>(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimationComplete(true);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (animationComplete) {
+      setIsGlobeVisible(true);
+    }
+  }, [animationComplete]);
 
   return (
     <Column center maxWidth="m" gap="xl" horizontal="center">
@@ -57,10 +74,8 @@ export default function Home() {
             </Button>
           </RevealFx>
         </Column>
-        <Column center>
-          <RevealFx center translateY="8" horizontal="start" fillWidth>
-            <ModernGlobe />
-          </RevealFx>
+        <Column style={{minWidth: "300px", minHeight: "290px"}} center>
+            {isGlobeVisible && <ModernGlobe />}
         </Column>
       </Flex>
     </Column>
