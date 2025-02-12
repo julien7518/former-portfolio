@@ -2,14 +2,15 @@ import "@/once-ui/styles/index.scss";
 import "@/once-ui/tokens/index.scss";
 
 import classNames from "classnames";
-import { Footer, Header } from "@/components";
 import { style, baseURL, home, person } from "@/app/resources";
-import { Inter } from "next/font/google";
-import { Source_Code_Pro } from "next/font/google";
-import { Column, Flex, Background } from "@/once-ui/components";
+import { Footer, Header } from "@/components";
+import { Column, Flex } from "@/once-ui/components";
 import { MobileProvider } from "@/components/MobileContext";
+import AdaptativeBackground from "@/components/AdaptativeBackground";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Inter } from "next/font/google";
+import { Source_Code_Pro } from "next/font/google";
 
 export async function generateMetadata() {
   return {
@@ -88,31 +89,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <SpeedInsights />
       <MobileProvider>
         <Column style={{ minHeight: "100vh" }} as="body" fillWidth margin="0" padding="0">
-            <Background
-            position="absolute"
-            mask={{
-              cursor: true
-            }}
-            gradient={{}}
-            dots={{
-              color: 'accent-on-background-medium',
-              display: true,
-              opacity: 100,
-              size: '64'
-            }}
-            grid={{
-              color: 'neutral-alpha-medium',
-              display: true,
-              height: 'var(--static-space-32)',
-              opacity: 100,
-              width: 'var(--static-space-32)'
-            }}
-            lines={{
-              display: true,
-              opacity: 100,
-              size: '24'
-            }}
-          />
+          <AdaptativeBackground />
           <Flex fillWidth minHeight="16"></Flex>
           <Header />
           <Flex

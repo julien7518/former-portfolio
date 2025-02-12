@@ -6,7 +6,7 @@ const person = {
   },
   role: "Web Designer & Developer",
   location: "Paris, France",
-  languages: ["French", "English", "Español"],
+  languages: ["French", "English", "Spanish"],
 };
 
 const social = [
@@ -80,7 +80,7 @@ const about = {
     ],
   },
   technologies: {
-    title: "Techologies",
+    title: "Technologies",
     techs: [
       {
         name: "React",

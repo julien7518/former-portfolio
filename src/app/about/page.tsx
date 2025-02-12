@@ -1,16 +1,10 @@
-import {
-  Column,
-  Flex,
-  Heading,
-  Tag,
-  Text,
-} from "@/once-ui/components";
+import { Column, Flex, Heading, Text } from "@/once-ui/components"
 import { baseURL, person, about, social } from "@/app/resources";
 import TableOfContents from "@/components/TableOfContents";
-import styles from "@/components/TableOfContents.module.scss";
-import React from "react";
 import GridTechnologies from "@/components/GridTechnologies";
 import LanguagesList from "@/components/LanguagesList";
+import styles from "@/components/TableOfContents.module.scss";
+import React from "react";
 
 export async function generateMetadata() {
   const title = about.title;

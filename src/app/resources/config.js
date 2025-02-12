@@ -1,4 +1,4 @@
-const baseURL = "localhost:3000";
+const baseURL = "julien-fernandes.vercel.app";
 
 const routes = {
   "/": true,

@@ -1,14 +1,4 @@
-"use client";
-
-import {
-  Carousel,
-  Column,
-  Flex,
-  Heading,
-  SmartLink,
-  Text,
-  AvatarGroup
-} from "@/once-ui/components";
+import { Carousel, Column, Flex, Heading, SmartLink, Text, AvatarGroup } from "@/once-ui/components";
 import { about, techsTableIndex } from "@/app/resources";
 
 interface ProjectCardProps {

@@ -1,5 +1,5 @@
 import { getProjects } from "@/app/utils/utils";
-import ProjectsClient from "./ProjectsClient";
+import ProjectsClient from "@/components/ProjectsClient";
 
 interface RangeProps {
   range?: [number, number?];

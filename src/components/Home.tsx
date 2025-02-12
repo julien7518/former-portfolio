@@ -3,13 +3,13 @@
 import { useIsMobile } from "@/components/MobileContext";
 import { Heading, Flex, Text, Button, RevealFx, Column } from "@/once-ui/components";
 import { baseURL, home, about, person } from "@/app/resources";
+import ModernGlobe from "./ModernGlobe";
 
 export default function Home() {
   const isMobile = useIsMobile();
-  const Container = isMobile ? Column : Flex;
 
   return (
-    <Column maxWidth="m" gap="xl" horizontal="center">
+    <Column center maxWidth="m" gap="xl" horizontal="center">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -32,7 +32,7 @@ export default function Home() {
           }),
         }}
       />
-      <Container fillWidth paddingY="m" gap="m">
+      <Flex direction="row" tabletDirection="column" mobileDirection="column" fillWidth paddingX={isMobile ? "l" : undefined} paddingY="m" gap="m">
         <Column maxWidth="s">
           <RevealFx translateY="4" fillWidth horizontal="start" paddingBottom="m">
             <Heading wrap="balance" variant="display-strong-l">
@@ -40,7 +40,7 @@ export default function Home() {
             </Heading>
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="start" paddingBottom="m">
-            <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
+            <Text align={isMobile ? "justify" : undefined} wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
               {home.subline}
             </Text>
           </RevealFx>
@@ -57,10 +57,12 @@ export default function Home() {
             </Button>
           </RevealFx>
         </Column>
-        <Column>
-          <Text>Three.js is coming...</Text>
+        <Column center>
+          <RevealFx center translateY="8" horizontal="start" fillWidth>
+            <ModernGlobe />
+          </RevealFx>
         </Column>
-      </Container>
+      </Flex>
     </Column>
   );
 }

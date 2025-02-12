@@ -1,6 +1,6 @@
 import { Flex, IconButton, Text } from "@/once-ui/components";
 import { person, social } from "@/app/resources/content";
-import styles from "./Footer.module.scss";
+import styles from "@/components/Footer.module.scss";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();

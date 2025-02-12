@@ -1,6 +1,5 @@
 import { Flex, Icon, Input, Textarea, Button } from "@/once-ui/components";
-import { contact } from "../resources";
-import { baseURL } from "../resources";
+import { baseURL, contact } from "@/app/resources";
 import MobileTitle from "@/components/MobileTitle";
 
 export async function generateMetadata() {
@@ -47,6 +46,7 @@ export default function Contact() {
         id="email"
         defaultValue=""
         label="Your email"
+        errorMessage="Not working for the moment"
         hasPrefix={<Icon name="outlineEmail" size="s"/>}
       />
       <Input
@@ -67,6 +67,7 @@ export default function Contact() {
           variant="primary"
           size="l"
           label="Send"
+          disabled
         />
       </Flex>
     </Flex>

@@ -1,8 +1,8 @@
 "use client";
 import { Column, Grid } from "@/once-ui/components";
-import { ProjectCard } from "./ProjectCard";
-import { useIsMobile } from "./MobileContext";
-import MobileTitle from "./MobileTitle";
+import { ProjectCard } from "@/components/ProjectCard";
+import { useIsMobile } from "@/components/MobileContext";
+import MobileTitle from "@/components/MobileTitle";
 import { work } from "@/app/resources";
 
 export default function ProjectsClient({ projects }) {

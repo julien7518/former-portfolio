@@ -1,4 +1,4 @@
-import { generateMetadata } from "./HomeMetaData";
+import { generateMetadata } from "@/app/HomeMetaData";
 import Home from "@/components/Home";
 
 export { /* @next-codemod-error `generateMetadata` export is re-exported. Check if this component uses `params` or `searchParams`*/
