@@ -1,4 +1,4 @@
-import { Metadata, ResolvingMetadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { baseURL, contact } from "@/app/resources";
 import Contact from "./Contact";
 

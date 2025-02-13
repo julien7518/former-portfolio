@@ -51,7 +51,7 @@ export async function GET(request: Request) {
           }}
         >
           <img
-            src={`https://localhost:3000/images/og-icon.png`}
+            src={`https://${baseURL}/images/og-icon.png`}
             height={192}
             width={192}
             style={{

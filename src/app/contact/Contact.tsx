@@ -1,41 +1,12 @@
 "use client"
 import { Flex, Icon, Input, Textarea, Button, useToast, Text } from "@/once-ui/components";
-import { baseURL, contact } from "@/app/resources";
+import { contact } from "@/app/resources";
 import MobileTitle from "@/components/MobileTitle";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from 'zod'
 import { useState, useEffect } from "react";
 import { useIsMobile } from "@/components/MobileContext";
-
-export async function generateMetadata() {
-  const title = contact.title;
-  const description = contact.description;
-  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: "website",
-      url: `https://${baseURL}/about`,
-      images: [
-        {
-          url: ogImage,
-          alt: title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [ogImage],
-    },
-  };
-}
 
 const formSchema = z.object({
   firstName: z
