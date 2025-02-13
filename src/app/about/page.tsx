@@ -5,9 +5,14 @@ import GridTechnologies from "@/components/GridTechnologies";
 import LanguagesList from "@/components/LanguagesList";
 import styles from "@/components/TableOfContents.module.scss";
 import React from "react";
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata , ResolvingMetadata} from 'next'
 
-export async function generateMetadata(parent: ResolvingMetadata): Promise<Metadata> {
+type Props = {
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+ 
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const title = about.title;
   const description = about.description;
   const previousOGImages = (await parent).openGraph?.images || []

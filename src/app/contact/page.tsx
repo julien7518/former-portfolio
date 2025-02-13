@@ -2,7 +2,12 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { baseURL, contact } from "@/app/resources";
 import Contact from "./Contact";
 
-export async function generateMetadata(parent: ResolvingMetadata): Promise<Metadata> {
+type Props = {
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+ 
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
     const title = contact.title;
     const description = contact.description;
     const previousOGImages = (await parent).openGraph?.images || []

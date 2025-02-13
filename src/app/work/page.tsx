@@ -4,7 +4,12 @@ import Projects from "@/components/Projects";
 import { baseURL, person, work } from "@/app/resources";
 import type { Metadata, ResolvingMetadata } from 'next'
 
-export async function generateMetadata(parent: ResolvingMetadata): Promise<Metadata> {
+type Props = {
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+ 
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const title = work.title;
   const description = work.description;
   const previousOGImages = (await parent).openGraph?.images || []
