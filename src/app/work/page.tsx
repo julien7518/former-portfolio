@@ -2,10 +2,13 @@ import { getProjects } from "@/app/utils/utils";
 import { Column } from "@/once-ui/components";
 import Projects from "@/components/Projects";
 import { baseURL, person, work } from "@/app/resources";
+import type { Metadata, ResolvingMetadata } from 'next'
 
-export async function generateMetadata() {
+export async function generateMetadata(parent: ResolvingMetadata): Promise<Metadata> {
   const title = work.title;
   const description = work.description;
+  const previousOGImages = (await parent).openGraph?.images || []
+  const previousTwitterImage = (await parent).twitter?.images || []
   const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
 
   return {
@@ -15,19 +18,14 @@ export async function generateMetadata() {
       title,
       description,
       type: "website",
-      url: `https://${baseURL}/work/`,
-      images: [
-        {
-          url: ogImage,
-          alt: title,
-        },
-      ],
+      url: `https://${baseURL}`,
+      images: [{ url: ogImage, alt: title }, ...previousOGImages],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: [ogImage, ...previousTwitterImage],
     },
   };
 }

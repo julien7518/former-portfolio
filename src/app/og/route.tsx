@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { person } from "@/app/resources";
+import { baseURL, person } from "@/app/resources";
 
 export const runtime = "edge";
 
@@ -50,6 +50,16 @@ export async function GET(request: Request) {
             gap: "5rem",
           }}
         >
+          <img
+            src={`https://localhost:3000/images/og-icon.png`}
+            height={192}
+            width={192}
+            style={{
+              width: "12rem",
+              height: "12rem",
+              objectFit: "cover",
+            }}          
+          />
           <div
             style={{
               display: "flex",

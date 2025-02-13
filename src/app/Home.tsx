@@ -1,10 +1,10 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useIsMobile } from "@/components/MobileContext";
-import { Heading, Flex, Text, Button, RevealFx, Column, Spinner } from "@/once-ui/components";
+import { Heading, Flex, Text, Button, RevealFx, Column } from "@/once-ui/components";
 import { baseURL, home, about, person } from "@/app/resources";
-import ModernGlobe from "./ModernGlobe";
+import ModernGlobe from "@/components/ModernGlobe";
 
 export default function Home() {
   const isMobile = useIsMobile();

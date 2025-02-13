@@ -4,13 +4,15 @@ import "@/once-ui/tokens/index.scss";
 import classNames from "classnames";
 import { style, baseURL, home, person } from "@/app/resources";
 import { Footer, Header } from "@/components";
-import { Column, Flex, ToastProvider } from "@/once-ui/components";
+import { Column, Flex, ToastProvider, Spinner } from "@/once-ui/components";
 import { MobileProvider } from "@/components/MobileContext";
 import AdaptativeBackground from "@/components/AdaptativeBackground";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 import { Source_Code_Pro } from "next/font/google";
+import { Viewport } from "next";
+import { Suspense } from "react";
 
 export async function generateMetadata() {
   return {
@@ -36,7 +38,16 @@ export async function generateMetadata() {
         "max-snippet": -1,
       },
     },
+    icons: {
+      icon: '/icon.svg',
+      shortcut: '/shortcut-icon.png',
+      apple: '/apple-icon.png',
+    },
   };
+}
+
+export const viewport: Viewport = {
+  colorScheme: 'light',
 }
 
 const primary = Inter({
@@ -103,7 +114,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             flex={1}
           >
             <Flex horizontal="center" fillWidth minHeight="0">
-                {children}
+                <Suspense fallback={<Spinner />}>
+                  {children}
+                </Suspense>
             </Flex>
           </Flex>
           <Footer />

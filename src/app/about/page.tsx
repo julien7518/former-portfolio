@@ -5,10 +5,13 @@ import GridTechnologies from "@/components/GridTechnologies";
 import LanguagesList from "@/components/LanguagesList";
 import styles from "@/components/TableOfContents.module.scss";
 import React from "react";
+import type { Metadata, ResolvingMetadata } from 'next'
 
-export async function generateMetadata() {
+export async function generateMetadata(parent: ResolvingMetadata): Promise<Metadata> {
   const title = about.title;
   const description = about.description;
+  const previousOGImages = (await parent).openGraph?.images || []
+  const previousTwitterImage = (await parent).twitter?.images || []
   const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
 
   return {
@@ -18,19 +21,14 @@ export async function generateMetadata() {
       title,
       description,
       type: "website",
-      url: `https://${baseURL}/about`,
-      images: [
-        {
-          url: ogImage,
-          alt: title,
-        },
-      ],
+      url: `https://${baseURL}`,
+      images: [{ url: ogImage, alt: title }, ...previousOGImages],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: [ogImage, ...previousTwitterImage],
     },
   };
 }
