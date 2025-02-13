@@ -1,6 +1,6 @@
 # To Do
 
-- [ ] Create the Form in `/contact`
+- [x] Create the Form in `/contact`
 - [x] Finish the Three.js in the homepage `/`
 - [ ] Add a favicon
 - [x] Create the buttons for technologies

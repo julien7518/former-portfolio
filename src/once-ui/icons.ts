@@ -9,6 +9,9 @@ import {
   HiEnvelope,
   HiArrowRight,
   HiOutlineEnvelope,
+  HiCheckCircle,
+  HiMiniXMark,
+  HiExclamationCircle,
 } from "react-icons/hi2";
 
 import {
@@ -19,6 +22,7 @@ import {
   PiHouseDuotone,
   PiUserCircleDuotone,
   PiGridFourDuotone,
+  PiUser,
 } from "react-icons/pi";
 
 import {
@@ -29,6 +33,9 @@ import {
 } from "react-icons/fa6";
 
 export const iconLibrary: Record<string, IconType> = {
+  errorCircle: HiExclamationCircle,
+  checkCircle: HiCheckCircle,
+  close: HiMiniXMark,
   chevronRight: HiChevronRight,
   chevronLeft: HiChevronLeft,
   ChevronUp: HiChevronUp,
@@ -38,6 +45,7 @@ export const iconLibrary: Record<string, IconType> = {
   outlineEmail: HiOutlineEnvelope,
   subject: TbLabelImportant,
   person: PiUserCircleDuotone,
+  name: PiUser,
   grid: PiGridFourDuotone,
   home: PiHouseDuotone,
   discord: FaDiscord,

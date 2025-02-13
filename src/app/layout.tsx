@@ -4,7 +4,7 @@ import "@/once-ui/tokens/index.scss";
 import classNames from "classnames";
 import { style, baseURL, home, person } from "@/app/resources";
 import { Footer, Header } from "@/components";
-import { Column, Flex } from "@/once-ui/components";
+import { Column, Flex, ToastProvider } from "@/once-ui/components";
 import { MobileProvider } from "@/components/MobileContext";
 import AdaptativeBackground from "@/components/AdaptativeBackground";
 import { Analytics } from "@vercel/analytics/next";
@@ -87,6 +87,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     >
       <Analytics/>
       <SpeedInsights />
+      <ToastProvider>
       <MobileProvider>
         <Column style={{ minHeight: "100vh" }} as="body" fillWidth margin="0" padding="0">
           <AdaptativeBackground />
@@ -102,12 +103,13 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             flex={1}
           >
             <Flex horizontal="center" fillWidth minHeight="0">
-              {children}
+                {children}
             </Flex>
           </Flex>
           <Footer />
         </Column>
       </MobileProvider>
+      </ToastProvider>
     </Flex>
   );
 }
