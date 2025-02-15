@@ -1,8 +1,10 @@
 import { Carousel, Column, Flex, Heading, SmartLink, Text, AvatarGroup } from "@/once-ui/components";
 import { about, techsTableIndex } from "@/app/resources";
+import { Image } from "@/once-ui/components/Carousel";
 
 interface ProjectCardProps {
   href: string;
+  previewLimit: number;
   images: string[];
   title: string;
   description: string;
@@ -12,20 +14,25 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   href,
+  previewLimit,
   images = [],
   title,
   description,
   link,
   techs,
 }) => {
+  const previewImages: Image[] = [];
+  images.forEach((image, index) => {
+    if (index < previewLimit){
+      previewImages.push({src: image, alt: title})
+    }
+  })
+
   return (
     <Column fillWidth>
       <Carousel
         sizes="(max-width: 960px) 100vw, 960px"
-        images={images.map((image) => ({
-          src: image,
-          alt: title,
-        }))}
+        images={previewImages}
       />
       {images.length <= 1 && (
         <>

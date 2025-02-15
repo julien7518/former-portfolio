@@ -20,6 +20,7 @@ export default function ProjectsClient({ projects }) {
         <ProjectCard
           key={project.slug}
           href={`work/${project.slug}`}
+          previewLimit={project.metadata.previewLimit}
           images={project.metadata.images}
           title={project.metadata.title}
           description={project.metadata.summary}

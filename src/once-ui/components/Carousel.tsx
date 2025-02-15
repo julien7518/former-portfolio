@@ -3,7 +3,7 @@
 import { Flex, RevealFx, Scroller, SmartImage } from "@/once-ui/components";
 import { useEffect, useState, useRef } from "react";
 
-interface Image {
+export interface Image {
   src: string;
   alt: string;
 }

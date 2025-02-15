@@ -49,9 +49,8 @@ export async function generateMetadata(props: WorkParams) {
     publishedAt: publishedTime,
     summary: description,
     images,
-    image,
   } = project.metadata;
-  let ogImage = image ? `https://${baseURL}${image}` : `https://${baseURL}/og?title=${title}`;
+  let ogImage = images[0] ? `https://${baseURL}${images[0]}` : `https://${baseURL}/og?title=${title}`;
 
   return {
     title,
@@ -99,8 +98,8 @@ export default async function Project(props: WorkParams) {
             datePublished: project.metadata.publishedAt,
             dateModified: project.metadata.publishedAt,
             description: project.metadata.summary,
-            image: project.metadata.image
-              ? `https://${baseURL}${project.metadata.image}`
+            image: project.metadata.images[0]
+              ? `https://${baseURL}${project.metadata.images[0]}`
               : `https://${baseURL}/og?title=${project.metadata.title}`,
             url: `https://${baseURL}/work/${project.slug}`,
             author: {
@@ -147,7 +146,7 @@ export default async function Project(props: WorkParams) {
           )}
         </Flex>
         <CustomMDX source={project.content} />
-        <Heading marginBottom="12" marginTop="12" as="h2">Technologies used</Heading>
+        <Heading marginBottom="24" marginTop="12" as="h2">Technologies used</Heading>
         <Grid columns={6} fillWidth gap="l" marginBottom="40">
           {project.metadata.techs.map((tech, index) => (
             <TechButton key={index} small={true} techs={(about.technologies.techs)[techsTableIndex[tech]]}/>
@@ -155,8 +154,9 @@ export default async function Project(props: WorkParams) {
         </Grid>
         {project.metadata.images.length > 1 && (
           <>
-          <Heading marginBottom="12" marginTop="12" as="h2">Gallery</Heading>
+          <Heading marginBottom="12" marginTop="24" as="h2">Gallery</Heading>
           <Scroller
+            marginTop="12"
             direction="row"
             maxHeight={12}
             fillWidth

@@ -12,6 +12,7 @@ import {
   HiCheckCircle,
   HiMiniXMark,
   HiExclamationCircle,
+  HiListBullet
 } from "react-icons/hi2";
 
 import {
@@ -33,6 +34,7 @@ import {
 } from "react-icons/fa6";
 
 export const iconLibrary: Record<string, IconType> = {
+  list: HiListBullet,
   errorCircle: HiExclamationCircle,
   checkCircle: HiCheckCircle,
   close: HiMiniXMark,

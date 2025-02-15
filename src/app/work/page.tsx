@@ -60,12 +60,13 @@ export default function Work() {
               headline: project.metadata.title,
               description: project.metadata.summary,
               url: `https://${baseURL}/projects/${project.slug}`,
-              image: `${baseURL}/${project.metadata.image}`,
+              image: `${baseURL}/${project.metadata.images[0]}`,
             })),
           }),
         }}
       />
-      <Projects />
+      <Projects range={[2, 3]}/>
+      <Projects range={[1, 1]}/>
     </Column>
   );
 }

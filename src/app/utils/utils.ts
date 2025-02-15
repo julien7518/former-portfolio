@@ -2,13 +2,12 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-type Metadata = {
+type ProjectsMetadata = {
   title: string;
   publishedAt: string;
   summary: string;
-  image?: string;
   images: string[];
-  tag?: string;
+  previewLimit?: number;
   link?: string;
   techs: string[];
 };
@@ -31,14 +30,13 @@ function readMDXFile(filePath: string) {
   const rawContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(rawContent);
 
-  const metadata: Metadata = {
+  const metadata: ProjectsMetadata = {
     title: data.title || "",
     publishedAt: data.publishedAt,
     summary: data.summary || "",
-    image: data.image || "",
     images: data.images || [],
-    tag: data.tag || [],
     link: data.link || "",
+    previewLimit: data.previewLimit || 1,
     techs: data.techs || [],
   };
 

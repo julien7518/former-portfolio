@@ -40,7 +40,7 @@ export async function generateMetadata() {
     },
     icons: {
       icon: '/icon.svg',
-      shortcut: '/shortcut-icon.png',
+      shortcut: '/images/shortcut-icon.png',
       apple: '/apple-icon.png',
     },
   };
