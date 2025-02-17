@@ -34,7 +34,7 @@ const home = {
   headline: <>{person.role}</>,
   subline: (
     <>
-      I'm {person.firstName}, a creative developer who loves to create and develop his own projects.
+      I'm {person.firstName}, a creative developer driven by building and bringing ideas to life.
     </>
   ),
 };
@@ -47,8 +47,7 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        I'm a {person.location.split(',')[0]}-based student in engineering with a passion for transforming challenges
-        into simple and design solutions.
+        I'm a {person.location.split(',')[0]}-based student in engineering, dedicated to transforming challenges into simple and design solutions.
       </>
     ),
   },
@@ -70,12 +69,12 @@ const about = {
       {
         name: "ESILV - École Supérieure d'Ingénieurs Léonard de Vinci",
         location: "Paris, France",
-        description: <>Studying engineering and creative technology</>,
+        description: <>Studying engineering and creative technology, focusing on computer science, applied mathematics, and problem-solving through innovation.</>,
       },
       {
         name: "Dorset College",
         location: "Dublin, Irlande",
-        description: <>International exchange, continue studying engineering during a semester abroad</>
+        description: <>Continuing my engineering studies abroad through an international exchange semester.d</>
       }
     ],
   },
